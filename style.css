@@ -1,50 +1,65 @@
-  body {
-    min-width: 500px;
-    overflow-x: hidden;
-    font-family: tahoma;
-    font-size: 11px;
-  }
+body {
+  min-width: 500px;
+  overflow-x: hidden;
+  font-family: tahoma;
+  font-size: 11px;
+}
 
-  #tags {
-    margin: 0 0 20px 0;
-  }
+#tags {
+  margin: 0 0 20px 0;
+}
 
-  .tag {
-    display: block;
-    float: left;
-    background: #e4e4e4;
-    margin: 0 1px 2px 1px;
-    padding: 0 2px 0 2px;
-    cursor: pointer;
-  }
+.tag {
+  display: block;
+  float: left;
+  background: #e4e4e4;
+  margin: 0 1px 2px 1px;
+  padding: 0 2px 0 2px;
+  cursor: pointer;
+}
 
-  label {
-    width: 85px;
-    display: block;
-    float: left;
-  }
+label {
+  width: 85px;
+  display: block;
+  float: left;
+}
 
-  #urlBar, #titleBar, #tagsBar {
-    width: 400px;
-    border: 1px solid #ccc;
-  }
+#urlBar, #titleBar, #tagsBar {
+  width: 400px;
+  border: 1px solid #ccc;
+}
 
-  #descriptionBar {
-    width: 400px;
-    height: 50px;
-    border: 1px solid #ccc;
-  }
+#descriptionBar {
+  width: 400px;
+  height: 50px;
+  border: 1px solid #ccc;
+}
 
-  #submit {
-    display: block;
-    width: 60px;
-    height: 24px;
-    background: #00aeff;
-    color: white;
-    border: 0;
-    border-radius: 3px;
-  }
+#submit {
+  display: block;
+  width: 60px;
+  height: 24px;
+  background: #00aeff;
+  color: white;
+  border: 0;
+  border-radius: 3px;
+}
 
-  #submit:active {
-    background: #007fba;
-  }
+#submit:active {
+  background: #007fba;
+}
+
+#submit.done {
+  background: #01df3a;
+}
+
+#status {
+  margin: 15px 0 0 0;
+}
+
+#status .warning {
+  background: #df0101;
+  color: white;
+  padding: 2px;
+  margin: 5px;
+}

@@ -4,12 +4,15 @@ var descriptionBar;
 var tagsBar;
 
 var tagsDiv;
+var statusDiv;
+
+var submitBtn;
 
 var url;
 var title;
 
-var username = localStorage["pinboard_username"]
-var password = localStorage["pinboard_password"]
+var username = localStorage["pinboard_username"];
+var password = localStorage["pinboard_password"];
 
 function init() {
 
@@ -20,13 +23,18 @@ function init() {
 
   tagsBar = document.getElementById("tagsBar");
   tagsDiv = document.getElementById("tags");
+  statusDiv = document.getElementById("status");
+
+  submitBtn = document.getElementById("submit");
+
+  if (!username || !password)
+   setWarning("You have not yet entered login information for pinboard, you should go do so on the options page");
 
   chrome.tabs.getSelected(undefined, function(tab) {
 
     /* Get page URL and title for the current tab */
 
     url = tab.url;
-    alert(url);
     title = tab.title;
 
     urlBar.value=url;
@@ -34,12 +42,26 @@ function init() {
 
     /* 
      * Finally get suggested tags for the current url
-     * We get this inside the function to ensure the url has been grabbed.
+     *
+     * We get this inside the "chrome.tabs.getSelected"-function 
+     * to ensure the url has been fetched.
      */
+    
     getSuggestedTags(url);
   });
+}
 
-  /* Finally get suggested tags for the current url */
+function setWarning(message) {
+  /* Create status element */
+  
+  var st = document.createElement("span");
+  st.className = "warning";
+  st.innerHTML = message;
+
+  /* Clear status and insert status element */
+
+  statusDiv.innerHTML="";
+  statusDiv.appendChild(st);
 }
 
 function tagClicked() {
@@ -47,17 +69,16 @@ function tagClicked() {
 }
 
 function appendTag(tag) {
-  alert(tag);
   var t = document.createElement('span');
   t.className = "tag";
   t.innerHTML = tag;
   t.onclick = tagClicked;
-  document.getElementById("tags").appendChild(t);
+  tagsDiv.appendChild(t);
 }
 
 function getSuggestedTags(url) {
   var request = new XMLHttpRequest();
-  //var urltoGet = "https://"+username+":"+password+"@api.pinboard.in/v1/posts/suggest?url="+encodeURI(url);
+  var urltoGet = "https://"+username+":"+password+"@api.pinboard.in/v1/posts/suggest?url="+encodeURI(url);
   request.open("GET","https://"+username+":"+password+"@api.pinboard.in/v1/posts/suggest?url="+encodeURI(url), false);
   request.send();
   xmlDoc=request.responseXML;
@@ -66,7 +87,7 @@ function getSuggestedTags(url) {
     var tagNodes = xmlTags.childNodes;
     for (var i=0; i<tagNodes.length;i++) {
       var node = tagNodes[i];
-      if(node.nodeName == "suggested" || node.nodeName == "recommended" || node.nodeName == "popular")
+      if(node.nodeName == "suggested" || node.nodeName == "popular")
         appendTag(node.childNodes[0].nodeValue);
     }
   }
@@ -79,20 +100,21 @@ function postForm() {
    * thus we make a XMLHttpRequest for posting the values instead.
    */
 
-   formUrl = encodeURI(document.getElementById("urlBar").value);
-   formTitle = encodeURI(document.getElementById("titleBar").value);
-   formDescription = encodeURI(document.getElementById("descriptionBar").value);
-   formTags = encodeURI(document.getElementById("tagsBar").value);
-   var pinUrl = "https://"+username+":"+password+"@api.pinboard.in/v1/posts/add" +
+  formUrl = encodeURI(document.getElementById("urlBar").value);
+  formTitle = encodeURI(document.getElementById("titleBar").value);
+  formDescription = encodeURI(document.getElementById("descriptionBar").value);
+  formTags = encodeURI(document.getElementById("tagsBar").value);
+  var pinUrl = "https://"+username+":"+password+"@api.pinboard.in/v1/posts/add" +
     "?url=" + formUrl + 
     "&description=" + formTitle +
     "&extended=" + formDescription +
     "&tags=" + formTags;
 
-   var request = new XMLHttpRequest();
-   request.open("GET",pinUrl,false);
-   request.send();
-   /*document.getElementById("tags").innerHTML=pinUrl;*/
-   /*document.getElementById("status").innerHTML=xmlDoc;*/
-   document.getElementById("submit").value="Done.";
+  var request = new XMLHttpRequest();
+  request.open("GET",pinUrl,false);
+  request.send();
+
+
+  submitBtn.className="done";
+  submitBtn.value="Done!";
 }
