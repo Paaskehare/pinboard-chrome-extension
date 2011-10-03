@@ -1,6 +1,6 @@
 {
   "name": "Pinboard Extension",
-  "version": "0.5",
+  "version": "0.8",
   "description": "Simple bookmark extension for pinboard",
   "options_page": "options.html",
   "browser_action": {
