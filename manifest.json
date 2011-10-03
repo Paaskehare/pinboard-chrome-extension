@@ -8,7 +8,8 @@
     "popup": "popup.html"
   },
   "permissions": [
-    "https://api.pinboard.in/v1/posts/add",
+    "https://*api.pinboard.in/v1/posts/add*",
+    "https://*api.pinboard.in/v1/posts/suggest*",
     "contentSettings", "tabs"
   ]
 }
