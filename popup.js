@@ -65,7 +65,17 @@ function setWarning(message) {
 }
 
 function tagClicked() {
-  tagsBar.value = tagsBar.value + this.innerHTML + " ";
+  var value = tagsBar.value;
+
+  if (this.className == "tagclicked") {
+    this.className = "tag";
+    value = value.replace(this.innerHTML + " ", "");
+  } else {
+    this.className = "tagclicked";
+    value = value + this.innerHTML + " ";
+  }
+
+  tagsBar.value = value;
 }
 
 function appendTag(tag) {
