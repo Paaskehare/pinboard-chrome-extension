@@ -1,0 +1,44 @@
+<html>
+<head><title>Pinboard Extension Options</title></head>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  localStorage["pinboard_username"] = username;
+  localStorage["pinboard_password"] = password;
+
+  // Update status to let user know options were saved.
+  var status = document.getElementById("status");
+  status.innerHTML = "Options Saved.";
+  setTimeout(function() {
+    status.innerHTML = "";
+  }, 750);
+}
+
+// Restores select box state to saved value from localStorage.
+function restore_options() {
+  var save_username = localStorage["pinboard_username"];
+  var save_password = localStorage["pinboard_password"];
+
+  if (!save_username) { return; }
+  if (!save_password) { return; }
+  document.getElementById("username").value = save_username;
+  document.getElementById("password").value = save_password;
+}
+
+</script>
+
+<body onload="restore_options()">
+
+Username:
+<input type="text" id="username" />
+<br />
+Password:
+<input type="password" id="password" />
+
+<br />
+<button onclick="save_options()">Save</button>
+</body>
+</html>

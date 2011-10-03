@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="popup.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body onload="init()">
+<div id="formdiv">
+  <div class="row">
+    <label for="urlBar">URL</label>
+    <input type="text" id="urlBar" name="url" />
+  </div>
+
+  <div class="row">
+    <label for="titleBar">Title</label>
+    <input type="text" id="titleBar" name="description" />
+  </div>
+
+  <div class="row">
+    <label for="descriptionBar">Description</label>
+    <textarea id="descriptionBar" name="extended"></textarea>
+  </div>
+
+  <div class="row">
+    <label for="tagsBar">Tags</label>
+    <input type="text" id="tagsBar" name="tags" />
+  </div>
+</div>
+<div id="tags">
+
+</div>
+<input type="submit" id="submit" value="Pin it!" onClick="return postForm();" />
+<div id="status">
+  
+</div>
+</body>
+</html>

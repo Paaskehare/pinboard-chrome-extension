@@ -1,0 +1,14 @@
+{
+  "name": "Pinboard Extension",
+  "version": "0.5",
+  "description": "Simple bookmark extension for pinboard",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "https://api.pinboard.in/v1/posts/add",
+    "contentSettings", "tabs"
+  ]
+}
