@@ -5,6 +5,17 @@ body {
   font-size: 11px;
 }
 
+label {
+  width: 85px;
+  display: block;
+  float: left;
+  line-height: 22px;
+}
+
+.row {
+  margin: 2px 0 4px 0;
+}
+
 #tags {
   margin: 0 0 20px 0;
 }
@@ -12,26 +23,24 @@ body {
 .tag, .tagclicked {
   display: block;
   float: left;
-  background: #e4e4e4;
   margin: 0 1px 2px 1px;
   padding: 3px;
   cursor: pointer;
 }
 
-.tagclicked {
-  background: #007fba;
-  color: white;
+.tag {
+  background: #e4e4e4;
 }
 
-label {
-  width: 85px;
-  display: block;
-  float: left;
+.tagclicked {
+  background: #00aeff;
+  color: white;
 }
 
 #urlBar, #titleBar, #tagsBar {
   width: 400px;
   border: 1px solid #ccc;
+  height: 18px;
 }
 
 #descriptionBar {
@@ -67,4 +76,12 @@ label {
   color: white;
   padding: 2px;
   margin: 5px;
+}
+
+/* Submit button just won't follow guidelines
+ * So we set a padding on the parent div
+ */
+
+#submitrow {
+  padding: 12px 0 0 0 !important;
 }
