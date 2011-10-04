@@ -3,6 +3,9 @@ var titleBar;
 var descriptionBar;
 var tagsBar;
 
+var privateToggle;
+var laterToggle;
+
 var tagsDiv;
 var statusDiv;
 
@@ -24,6 +27,9 @@ function init() {
   tagsBar = document.getElementById("tagsBar");
   tagsDiv = document.getElementById("tags");
   statusDiv = document.getElementById("status");
+
+  privateToggle = document.getElementById("privateToggle");
+  laterToggle = document.getElementById("laterToggle");
 
   submitBtn = document.getElementById("submit");
 
@@ -110,20 +116,32 @@ function postForm() {
    * thus we make a XMLHttpRequest for posting the values instead.
    */
 
-  formUrl = encodeURI(document.getElementById("urlBar").value);
-  formTitle = encodeURI(document.getElementById("titleBar").value);
-  formDescription = encodeURI(document.getElementById("descriptionBar").value);
-  formTags = encodeURI(document.getElementById("tagsBar").value);
+  var formPrivate = "yes";
+  var formLater = "no";
+
+  if(privateToggle.checked)
+    formPrivate = "no";
+  if(laterToggle.checked)
+    formLater = "yes";
+
+  var formUrl = encodeURI(document.getElementById("urlBar").value);
+  var formTitle = encodeURI(document.getElementById("titleBar").value);
+  var formDescription = encodeURI(document.getElementById("descriptionBar").value);
+  var formTags = encodeURI(document.getElementById("tagsBar").value).replace("%20", "+");
+
   var pinUrl = "https://"+username+":"+password+"@api.pinboard.in/v1/posts/add" +
     "?url=" + formUrl + 
     "&description=" + formTitle +
     "&extended=" + formDescription +
-    "&tags=" + formTags;
+    "&tags=" + formTags +
+    "&shared=" + formPrivate +
+    "&toread=" + formLater;
+
+  setWarning(pinUrl);
 
   var request = new XMLHttpRequest();
   request.open("GET",pinUrl,false);
   request.send();
-
 
   submitBtn.className="done";
   submitBtn.value="Done!";

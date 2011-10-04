@@ -26,8 +26,15 @@
     <input type="text" id="tagsBar" name="tags" />
   </div>
 </div>
-<label for="tags">Suggestions</label><div id="tags" class="row"></div>
-<div class="row" id="submitrow">
+<label for="tags">Suggest</label><div id="tags" class="row"></div>
+<div class="subrow">
+  <input type="checkbox" id="privateToggle" name="shared" />
+  <label for="privateToggle">private</label>
+  <input type="checkbox" id="laterToggle" name="toread" />
+  <label for="laterToggle">read later</label>
+  <div class="clear"></div>
+</div>
+<div class="subrow">
   <input type="submit" id="submit" value="Pin it!" onClick="return postForm();" />
 </div>
 <div id="status" class="row"></div>

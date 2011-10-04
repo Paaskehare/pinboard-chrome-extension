@@ -16,6 +16,10 @@ label {
   margin: 2px 0 4px 0;
 }
 
+.clear {
+  clear: both;
+}
+
 #tags {
   margin: 0 0 20px 0;
 }
@@ -41,6 +45,10 @@ label {
   width: 400px;
   border: 1px solid #ccc;
   height: 18px;
+}
+
+#privateToggle, #laterToggle {
+  float: left;
 }
 
 #descriptionBar {
@@ -78,10 +86,6 @@ label {
   margin: 5px;
 }
 
-/* Submit button just won't follow guidelines
- * So we set a padding on the parent div
- */
-
-#submitrow {
+.subrow {
   padding: 12px 0 0 0 !important;
 }
