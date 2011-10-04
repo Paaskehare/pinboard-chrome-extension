@@ -14,8 +14,15 @@ var submitBtn;
 var url;
 var title;
 
+var appurl = "api.pinboard.in";
+
 var username = localStorage["pinboard_username"];
 var password = localStorage["pinboard_password"];
+
+var application = localStorage["pinboard_application"];
+
+if (application == "delicious")
+  app_url = "api.del.icio.us";
 
 function init() {
 
@@ -94,8 +101,7 @@ function appendTag(tag) {
 
 function getSuggestedTags(url) {
   var request = new XMLHttpRequest();
-  var urltoGet = "https://"+username+":"+password+"@api.pinboard.in/v1/posts/suggest?url="+encodeURI(url);
-  request.open("GET","https://"+username+":"+password+"@api.pinboard.in/v1/posts/suggest?url="+encodeURI(url), false);
+  request.open("GET","https://"+username+":"+password+"@"+app_url+"/v1/posts/suggest?url="+encodeURI(url), false);
   request.send();
   xmlDoc=request.responseXML;
   var xmlTags = xmlDoc.getElementsByTagName("suggested")[0];
@@ -124,18 +130,20 @@ function postForm() {
   if(laterToggle.checked)
     formLater = "yes";
 
-  var formUrl = encodeURI(document.getElementById("urlBar").value);
-  var formTitle = encodeURI(document.getElementById("titleBar").value);
-  var formDescription = encodeURI(document.getElementById("descriptionBar").value);
-  var formTags = encodeURI(document.getElementById("tagsBar").value).replace("%20", "+");
+  var formUrl = encodeURI(document.getElementById("urlBar").value).replace("#", "%23");
+  var formTitle = encodeURI(document.getElementById("titleBar").value).replace("#", "%23");
+  var formDescription = encodeURI(document.getElementById("descriptionBar").value).replace("#", "%23");
+  var formTags = encodeURI(document.getElementById("tagsBar").value).replace("%20", "+").replace("#", "%23");
 
-  var pinUrl = "https://"+username+":"+password+"@api.pinboard.in/v1/posts/add" +
+  var pinUrl = "https://"+username+":"+password+"@"+app_url+"/v1/posts/add" +
     "?url=" + formUrl + 
     "&description=" + formTitle +
     "&extended=" + formDescription +
     "&tags=" + formTags +
-    "&shared=" + formPrivate +
-    "&toread=" + formLater;
+    "&shared=" + formPrivate;
+
+  if(application != "delicious")
+    pinUrl += "&toread=" + formLater;
 
   var request = new XMLHttpRequest();
   request.open("GET",pinUrl,false);

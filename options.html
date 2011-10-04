@@ -6,6 +6,11 @@
 function save_options() {
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
+  var select = document.getElementById("application");
+
+  var favorite = select.children[select.selectedIndex].value;
+  localStorage["pinboard_application"] = favorite;
+
   localStorage["pinboard_username"] = username;
   localStorage["pinboard_password"] = password;
 
@@ -21,11 +26,25 @@ function save_options() {
 function restore_options() {
   var save_username = localStorage["pinboard_username"];
   var save_password = localStorage["pinboard_password"];
+  var save_application = localStorage["pinboard_application"];
+
+  /* set default application */
+  if (!save_application) { save_application = "pinboard" }
 
   if (!save_username) { return; }
   if (!save_password) { return; }
+
   document.getElementById("username").value = save_username;
   document.getElementById("password").value = save_password;
+
+  var select = document.getElementById("application");
+  for (var i = 0; i < select.children.length; i++) {
+    var child = select.children[i];
+    if (child.value == save_application) {
+      child.selected = "true";
+      break;
+    }
+  }
 }
 
 </script>
@@ -37,8 +56,15 @@ Username:
 <br />
 Password:
 <input type="password" id="password" />
+<br />
+Application:
+<select id="application">
+ <option value="pinboard">Pinboard</option>
+ <option value="delicious">Delicious</option>
+</select>
 
 <br />
 <button onclick="save_options()">Save</button>
+<div id="status"></div>
 </body>
 </html>
