@@ -137,8 +137,6 @@ function postForm() {
     "&shared=" + formPrivate +
     "&toread=" + formLater;
 
-  setWarning(pinUrl);
-
   var request = new XMLHttpRequest();
   request.open("GET",pinUrl,false);
   request.send();
