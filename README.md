@@ -1,7 +1,7 @@
 Pinboard Chrome Extension
 =========================
 
-This is a Google Chrome extension which adds a simple button to the top right of your browser, to allow for quickly adding a bookmark to [Pinboard](http://pinboard.in)
+This is a Google Chrome extension which adds a simple button to the top right of your browser, to allow for quickly adding a bookmark to [Pinboard](http://pinboard.in) - but it also has support for [Delicious](http://delicious.com)
 
 
 To do
