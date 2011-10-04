@@ -14,7 +14,7 @@ var submitBtn;
 var url;
 var title;
 
-var appurl = "api.pinboard.in";
+var app_url = "api.pinboard.in";
 
 var username = localStorage["pinboard_username"];
 var password = localStorage["pinboard_password"];
