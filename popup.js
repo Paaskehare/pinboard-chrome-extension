@@ -34,7 +34,7 @@ function init() {
   submitBtn = document.getElementById("submit");
 
   if (!username || !password)
-   setWarning("You have not yet entered login information for pinboard, you should go do so on the options page");
+   setWarning('<a href="'+chrome.extension.getURL("options.html")+'">Login information for pinboard required, please supply it by clicking here</a>');
 
   chrome.tabs.getSelected(undefined, function(tab) {
 
